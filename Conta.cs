@@ -4,10 +4,11 @@ class Conta
     public double Saldo { get; private set; }
 
 
-    public Conta(int codigo)
+    public Conta(int codigo, double valor)
     {
         Codigo = codigo;
         Saldo = 0.0;
+        VerificarSaldo(valor);
     }
 
     public void Sacar (double valor)
@@ -18,14 +19,12 @@ class Conta
         }
 
         Saldo = Saldo - valor;
+        ValidarValor(valor);
     }
 
     public void Depositar (double valor)
     {
-        if (valor < 1)
-        {
-            throw new ArgumentException("Impossível depositar valor negativo");
-        }
+        ValidarValor(valor);
 
         Saldo = Saldo + valor;
     }
@@ -38,6 +37,18 @@ class Conta
         }
 
         Saldo = Saldo - valor;
-        conta.Saldo = Saldo + valor;
+        conta.Saldo = conta.Saldo + valor;
+        ValidarValor(valor);
+        VerificarSaldo(valor);
+    }
+
+    public void ValidarValor (double valor)
+    {
+        if (valor <= 0) throw new ArgumentException("Valor deve ser maior que zero");
+    }
+
+    private void VerificarSaldo(double valor)
+    {
+        if (valor > Saldo) throw new ArgumentException("");
     }
 }
