@@ -1,14 +1,13 @@
 class Conta
 {
-    public int Codigo { get; set; }
+    public int Codigo { get; }
     public double Saldo { get; private set; }
 
 
-    public Conta(int codigo, double valor)
+    public Conta(int codigo)
     {
         Codigo = codigo;
         Saldo = 0.0;
-        VerificarSaldo(valor);
     }
 
     public void Sacar (double valor)
